@@ -1,0 +1,3 @@
+mail,status
+"usuario_que_sera_alertado@gmail.com",1
+"usuario_que_sera_ignorado@gmail.com",0
