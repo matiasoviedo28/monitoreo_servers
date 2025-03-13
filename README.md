@@ -29,7 +29,7 @@ El sistema consiste en:
 
    #### Script Python (send_mail.py)
 
-   En el archivo `send_mail.py`, deberás configurar las credenciales y los destinatarios de los correos electrónicos. Edita las siguientes variables:
+   En el archivo `send_mail.py`, deberás configurar las credenciales.
  
    si no haz creado un gmail y clave, te recomiendo este [video tutorial](https://www.youtube.com/watch?v=OJxShAGAvLM)
 
@@ -38,7 +38,7 @@ El sistema consiste en:
    El script verificará continuamente el estado de los servidores y enviará un correo si detecta un cambio en el estado. La frecuencia de verificación es de **10 segundos**, y los correos se enviarán solo si un servidor no responde durante una tolerancia definida. Por ejemplo, tengo un servidor que puede sufrir reinicios, entonces solo avisará si lleva 2 minutos sin responder.
 
 ### Interfaz Web
-Para el monitoreo en tiempo real, se diseñó una interfaz web con Flask, la cual muestra los servidores a monitorear, su estado (OK, NO RESPONDE, WARNING) su valor de ping en ms, y cada recuadro se clasifica con colores, Verde, Amarillo o Rojo.
+Para el monitoreo en tiempo real, se diseñó una interfaz web con Flask, la cual muestra los servidores a monitorear, su estado (OK, NO RESPONDE, WARNING) su valor de ping en ms, y cada recuadro se clasifica con colores, Verde, Amarillo, Naranja o Rojo.
 * `OK`: Se pintará de color Verde
 * `NO RESPONDE`: Se pintará de color Rojo, y mostrará un cronometro del tiempo de desconexión.
 * `Warning`: Se pintará de amarillo. Solo pasará cuando el ping a un servidor es alto. 
