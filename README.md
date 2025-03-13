@@ -91,3 +91,6 @@ Por ejemplo, en una configuración típica, los servidores a monitorear pueden e
 ### Contribuciones
 
 Para contribuir a este proyecto, por favor realiza un fork del repositorio y envía un pull request con tus cambios.
+
+### Contacto
+email: matiasalbertooviedogonzalez@gmail.com
