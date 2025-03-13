@@ -22,6 +22,7 @@
             justify-content: center;
             height: 100vh;
         }
+	.orange { background-color: #e67e22; } /* Color naranja */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -90,10 +91,13 @@
         <h1>Estado de la Red</h1>
         <div id="servers" class="grid"></div>
         <button class="stats-btn" onclick="showStats()">Ver Estadísticas</button>
+	<p>
+            Code By: <a href="https://github.com/matiasoviedo28/monitoreo_servers">Matias Oviedo</a>
+        </p>
     </div>
     <div class="modal-overlay" id="modalOverlay" onclick="closeStats()"></div>
     <div class="modal" id="statsModal">
-        <h2>Estadísticas</h2>
+        <h2>Tiempo acumulado sin rta.</h2>
         <div id="statsContent">Cargando estadísticas...</div>
         <button onclick="closeStats()">Cerrar</button>
     </div>
@@ -106,8 +110,16 @@
                     serversDiv.innerHTML = "";
                     data.forEach(server => {
                         let div = document.createElement("div");
-                        div.className = "server " + (server.estado === "OK" ? (parseFloat(server.ping) > 10 ? "yellow" : "green") : "red");
-                        div.innerHTML = `<strong>${server.nombre}</strong><br>${server.estado}<br>Ping: ${server.ping} ms`;
+                        div.className = "server " + 
+			    (server.estado === "OK" 
+			        ? (parseFloat(server.ping) > 20 
+			            ? "orange" 
+			            : (parseFloat(server.ping) > 10 
+			                ? "yellow" 
+			                : "green")) 
+			        : "red");
+
+                        div.innerHTML = `<strong>${server.nombre}</strong><br>${server.estado}<br>Ping: ${server.ping}`;
                         serversDiv.appendChild(div);
                     });
                 });
