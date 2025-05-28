@@ -70,7 +70,8 @@ while true; do
             fi
             if (( $(echo "$PING_RESULT > 10" | bc -l) )); then
                 NUEVO_ESTADO="WARNING"
-                python3 send_mail.py "$NOMBRE" "Alerta: Ping alto en $NOMBRE ($PING_RESULT ms)" &
+                ARGUMENTO="$NOMBRE:0"
+                python3 send_mail.py "$ARGUMENTO" &
             fi
         fi
         
