@@ -88,6 +88,10 @@ Por ejemplo, en una configuración típica, los servidores a monitorear pueden e
 * Hay que definir las credenciales, remplazando las de ejemplo del codigo. o modificando para crear un archivo serguro.
 * Hay que ejecutar solo `PIPLINE_COOP.sh`
 
+### Pruebas
+
+Las pruebas unitarias se ejecutan con `pytest`. Para lanzarlas, simplemente ejecuta `pytest` en la raíz del proyecto.
+
 ### Contribuciones
 
 Para contribuir a este proyecto, por favor realiza un fork del repositorio y envía un pull request con tus cambios.

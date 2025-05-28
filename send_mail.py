@@ -133,34 +133,35 @@ def sendmail(servidores_caidos):
 
 
 # ---------------------- PROCESO PRINCIPAL ----------------------
-print("🚀 Iniciando send_mail.py...")
+if __name__ == "__main__":
+    print("🚀 Iniciando send_mail.py...")
 
-if len(sys.argv) < 2:
-    print("⚠️ Uso: python send_mail.py 'servidor1:tiempo,servidor2:tiempo,...'")
-    sys.exit(1)
+    if len(sys.argv) < 2:
+        print("⚠️ Uso: python send_mail.py 'servidor1:tiempo,servidor2:tiempo,...'")
+        sys.exit(1)
 
-servidores_input = sys.argv[1].split(',')
-historial_envios = cargar_historial()
-tolerancias = cargar_tolerancias()
+    servidores_input = sys.argv[1].split(',')
+    historial_envios = cargar_historial()
+    tolerancias = cargar_tolerancias()
 
-# Filtrar servidores que superan su tolerancia y pueden enviar correo
-servidores_para_enviar = {}
+    # Filtrar servidores que superan su tolerancia y pueden enviar correo
+    servidores_para_enviar = {}
 
-for entrada in servidores_input:
-    partes = entrada.split(":")
-    if len(partes) == 2:
-        nombre, tiempo_caido = partes[0], int(partes[1])
-        tolerancia = tolerancias.get(nombre, 5)  # Si no está en CSV, usa 5 min
+    for entrada in servidores_input:
+        partes = entrada.split(":")
+        if len(partes) == 2:
+            nombre, tiempo_caido = partes[0], int(partes[1])
+            tolerancia = tolerancias.get(nombre, 5)  # Si no está en CSV, usa 5 min
 
-        print(f"🔍 Evaluando {nombre}: Caído {tiempo_caido} min, Tolerancia {tolerancia}")
+            print(f"🔍 Evaluando {nombre}: Caído {tiempo_caido} min, Tolerancia {tolerancia}")
 
-        if tiempo_caido >= tolerancia and puede_enviar_correo(nombre, historial_envios):
-            print(f"✅ {nombre} superó la tolerancia y no ha sido notificado recientemente.")
-            servidores_para_enviar[nombre] = tiempo_caido
+            if tiempo_caido >= tolerancia and puede_enviar_correo(nombre, historial_envios):
+                print(f"✅ {nombre} superó la tolerancia y no ha sido notificado recientemente.")
+                servidores_para_enviar[nombre] = tiempo_caido
 
-if servidores_para_enviar:
-    print("🔍 Servidores para enviar correo:", servidores_para_enviar)
-    sendmail(servidores_para_enviar)
-    actualizar_historial(historial_envios)
-else:
-    print("✅ No se enviará correo, todos los servidores ya fueron notificados recientemente o no superaron la tolerancia.")
+    if servidores_para_enviar:
+        print("🔍 Servidores para enviar correo:", servidores_para_enviar)
+        sendmail(servidores_para_enviar)
+        actualizar_historial(historial_envios)
+    else:
+        print("✅ No se enviará correo, todos los servidores ya fueron notificados recientemente o no superaron la tolerancia.")
